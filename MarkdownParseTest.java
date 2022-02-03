@@ -16,6 +16,11 @@ public class MarkdownParseTest {
     }
 
     @Test
+    public void randomFailTest(){
+        assertEquals(3, 1+1);
+    }
+
+    @Test
     public void firstTest() throws IOException{
         Path fileName = Path.of("test-file.md");
 	    String contents = Files.readString(fileName);
