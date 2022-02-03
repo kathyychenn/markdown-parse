@@ -16,8 +16,8 @@ public class MarkdownParseTest {
     }
 
     @Test
-    public void randomFailTest(){
-        assertEquals(3, 1+1);
+    public void randomFailTestNowFixed(){
+        assertEquals(2, 1+1);
     }
 
     @Test
