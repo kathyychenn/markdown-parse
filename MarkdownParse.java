@@ -10,6 +10,7 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then take up to
         // the next )
         int currentIndex = 0;
+        int index = 2;
         while(currentIndex < markdown.length()) {
             
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
@@ -18,7 +19,7 @@ public class MarkdownParse {
             int closeParen = markdown.indexOf(")", openParen);
            
              //difference between Image vs Link
-             //check if link on first line
+             //check if link on first line 
              if(nextOpenBracket != 0 && markdown.charAt(nextOpenBracket-1)=='!'){
                 currentIndex = closeParen+1;
                 continue;
