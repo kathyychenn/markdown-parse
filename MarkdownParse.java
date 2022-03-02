@@ -13,31 +13,23 @@ public class MarkdownParse {
         while(currentIndex < markdown.length()) {
             
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
+            if(nextOpenBracket == -1) {
+                break;
+            }
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
+            if(nextCloseBracket == -1){
+                break;
+            }
             int openParen = markdown.indexOf("(", nextCloseBracket);
             int closeParen = markdown.indexOf(")", openParen);
-           
-             //difference between Image vs Link
-             //check if link on first line 
-             if(nextOpenBracket != 0 && markdown.charAt(nextOpenBracket-1)=='!'){
-                currentIndex = closeParen+1;
-                continue;
+            if(openParen ==-1 || closeParen == -1 ){
+                break;
             }
-
-            //fix missing parentheses
-            if(openParen == -1){
-                return toReturn;
+            if (nextOpenBracket>=1  && !(markdown.charAt(nextOpenBracket-1)== '!' ) && openParen-nextCloseBracket == 1){
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
             }
-
-            //check if spaces between bracket and parentheses
-            if(openParen - nextCloseBracket != 1){
-                currentIndex = closeParen + 1;
-                continue;
-            }
-
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
             
+            currentIndex = closeParen + 1;
         }
         return toReturn;
     }
@@ -46,5 +38,6 @@ public class MarkdownParse {
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
         System.out.println(links);
+      //  System.out.println("We are timing how long it takes to run all our files it took 1 milute and 15 seconds");
     }
 }
